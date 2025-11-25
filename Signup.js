@@ -1,6 +1,6 @@
 var  userName = document.querySelector("#userName")
-var FirstName = document.querySelector("#FirstName")
-var LastName = document.querySelector("#LastName")
+var firstName = document.querySelector("#firstName")
+var lastName = document.querySelector("#lastName")
 var email = document.querySelector("#email")
 var password = document.querySelector("#password")
 var Cpassword = document.querySelector("#Cpassword")
@@ -10,7 +10,7 @@ var Cpassword = document.querySelector("#Cpassword")
 document.querySelector("#signupBtn").addEventListener("click",function () {
     var allUsers = JSON.parse(localStorage.getItem('allUsers')) || [] 
 
-if(!userName.value || !FirstName.value || !LastName.value || !email.value || !password.value || !Cpassword.value){
+if(!userName.value || !firstName.value || !lastName.value || !email.value || !password.value || !Cpassword.value){
     return alert("all fields are requird ")
 }
 
@@ -35,11 +35,11 @@ if(emailExist) return alert("Email already exist Try to login")
 
  var userDetails = {
     userName : userName.value , 
-    FirstName : FirstName.value , 
-    LastName : LastName.value , 
+    firstName : firstName.value , 
+    lastName : lastName.value , 
     email : email.value , 
-    password : password .value,
-
+    password : password.value,
+    userImg : "",
     
 
  
