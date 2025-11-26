@@ -115,6 +115,7 @@
         margin-bottom: 12px;
     }
 
+
     .post-header img {
         width: 45px;
         height: 45px;
@@ -152,4 +153,19 @@
 
     .btn:hover {
         color: #1877f2;
+    }
+    .delete-btn{
+        background-color: #1877f2;
+        color: #ccc;
+        border-radius: 20px;
+        border: none;
+        padding: 5px 15px;
+        
+    }
+    #EditBtn{
+         background-color: #1877f2;
+        color: #ccc;
+        border-radius: 20px;
+        border: none;
+        padding: 5px 15px; 
     }

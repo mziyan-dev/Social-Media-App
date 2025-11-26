@@ -23,9 +23,12 @@
       <button onclick="signup()">SignUp</button>
       <button onclick="login()">Login</button>
     </div>
-    <input type="text" placeholder="Search...">
-  </div>
 
+    <div id="toogle-btn" onclick="changeRules()" class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+      <label class="form-check-label" for="switchCheckDefault"></label>
+    </div>
+  </div>
   <!-- MAIN CONTENT -->
   <div class="container">
 
@@ -47,11 +50,11 @@
 
           <div class="modal-body">
 
-  <h2 class="fs-5">ADD Title</h2>
-  <input id="titleInput"  type="text" placeholder="ADD Title">
-  <hr>
-  <h2 class="fs-5">profile Pic url</h2>
-  <input id="profilePicInput"  type="text" placeholder="Add your profile picture url">
+
+  <!-- <h2 class="fs-5">profile Pic url</h2> -->
+  <h2 class="fs-5">imgUrl</h2>
+  <!-- <input id="profilePicInput"  type="text" placeholder="Add your profile picture url"> -->
+  <input id="ImgUrlInput"  type="text" placeholder="Add your profile picture url">
   <hr>
   <h2 class="fs-5">Description</h2>
   <textarea id="descriptionInput"  name="" id=""></textarea>
@@ -140,3 +143,5 @@
   </body>
 
   </html>
+
+ 
