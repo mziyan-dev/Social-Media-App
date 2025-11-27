@@ -10,49 +10,43 @@
     }
 
     /* Header */
-    .header {
-        position: fixed;
-        top: 0;
-        width: 100%;
-        background: #fff;
-        padding: 15px 20px;
-        display: flex;
-        justify-content:space-between;
-        align-items: center;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-        z-index: 100;
-    }
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  z-index: 100;
+  position: relative;
+}
+.header h2{
+   color : #0d6efd;
+}
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px; /* buttons ke beech proper spacing */
+}
 
-    .header h2 {
-        color: #1877f2;
-    }
+#signupbtn, #loginbtn, #Logoutbtn {
+  padding: 5px 15px;
+  border: none;
+  background: #0d6efd;
+  color: white;
+  border-radius: 20px;
+  cursor: pointer;
+}
 
-    .header input {
-        padding: 8px 12px;
-        width: 200px;
-        border-radius: 20px;
-        border: 1px solid #ccc;
-        outline: none;
-        transition: 0.3s;
-    }
-
-    .header input:focus {
-        border-color: #1877f2;
-    }
-    .header button{
-       background-color: #1877f2;
-        color: white ;
-        border-radius: 20px;
-        border: none;
-        padding: 5px 20px;
-       
-    }
+#signupbtn:hover, #loginbtn:hover, #Logoutbtn:hover {
+  background: #0b5ed7;
+}
 
     /* Main container */
     .container {
         padding: 90px 20px 20px;
         max-width: 600px;
         margin: auto;
+        margin-top: 20px;
     }
      #postBtn{
          background-color: #1877f2;
@@ -169,3 +163,4 @@
         border: none;
         padding: 5px 15px; 
     }
+
