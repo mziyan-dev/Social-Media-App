@@ -1,5 +1,6 @@
 
 var postModal = document.querySelector(".postmodal");
+const editModal = document.querySelector("#editModal");
 var post = document.querySelector("#feed"); 
 var newUserPost = false; 
 const titleInput = document.querySelector("#titleInput"); 
@@ -20,6 +21,10 @@ let editingPostId = null;
 var e = document.querySelector("body");
 let isblack  = false;
 
+
+
+
+
 function changeRules() {
   if (isblack === true) {
      e.style.backgroundColor = "#37383b";
@@ -33,13 +38,15 @@ function changeRules() {
 }
 
 function renderPosts() {
-
+var loggedUser = JSON.parse(localStorage.getItem("logged in user")) || null;
     post.innerHTML = "";
     var posts = JSON.parse(localStorage.getItem("postData")) || [];
+    console.log(posts);
+    
     posts.forEach(p => {
         var postCard = document.createElement("div");
         postCard.classList.add("post-card");
-
+// id="${p?.id}"
 
         postCard.innerHTML = `
             <div class="post-header">
@@ -47,13 +54,21 @@ function renderPosts() {
                 <div>
                 <div class="post-name">${p?.userinfo.userName}</div>
                 <div class="post-time">2 hours ago</div>
-                 <button id= "EditBtn" data-id="${p?.id}" onclick="editPosts(${p?.id})" style="margin-left:10px;">Edit Post</button>
+     <button id="postBtn" type="button" class="btn btn-primary" onclick="editPosts(${p.id})" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Edit post
+    </button>
                 </div>
             </div>
             <img class="post-img" src=${p?.imgUrl || "https://picsum.photos/600?food"} alt="Post Image">
             <p>${p.description || ''}</p>
             <div class="post-actions">
-                <div class="btn">❤️ Like</div>
+             ${loggedUser ? `
+        <button class= "like-btn" type="button" onclick="toggleLike('${p.id}', '${loggedUser.email}')">
+            ❤️ ${p.likes?.length || 0} Likes
+        </button>
+    ` : `
+        <button disabled>❤️ ${p.likes?.length || 0} Likes</button>
+    `}
                 <div class="btn">💬 Comment</div>
                 <div class="btn">↗ Share</div>
                 <button class="delete-btn" onclick="deletePost(${p?.id})" >Delete Post</button>
@@ -68,7 +83,7 @@ renderPosts()
 
 var postDataArray = JSON.parse(localStorage.getItem('postData')) || [];
 var loggedUser = JSON.parse(localStorage.getItem("logged in user"));
-console.log(loggedUser);
+// console.log(loggedUser);
 
 
 function btns(){
@@ -113,9 +128,6 @@ function isUserLoggedIn() {
     }else { postModal.style.display = "none"; }
  }
 
-
-
-
 function PostHandler() { 
 if (!descriptionInput.value && !profilePicInput) { 
     return alert("Please fill all fields!"); 
@@ -125,33 +137,7 @@ if (!descriptionInput.value && !profilePicInput) {
         alert("login first")
      return window.location = "login.html"
     }
-if (editingPostId) {
-    let posts = JSON.parse(localStorage.getItem("postData")) || [];
 
-    posts = posts.map(p => {
-        if (p.id === editingPostId) {
-            return {
-                p,
-                description: descriptionInput.value.trim(),
-                imgUrl: ImgUrlInput.value.trim()
-            };
-        }
-        return p;
-    });
-
-    localStorage.setItem("postData", JSON.stringify(posts));
-
-    editingPostId = null;
-    document.querySelector(".btn-primary").innerText = "Post";
-
-    let modalEl = document.getElementById("exampleModal");
-    let modal = bootstrap.Modal.getInstance(modalEl);
-    modal.hide();
-
-    renderPosts();
-    alert("Post updated successfully!");
-    return
-}
 var postData = { 
     id: Date.now().toString(),
     description: descriptionInput.value.trim(), 
@@ -191,27 +177,81 @@ function deletePost(id){
     renderPosts();
 }
 
-
-
 function editPosts(id) {
+    editModal.style.display = "block"
     let posts = JSON.parse(localStorage.getItem("postData")) || [];
-    let editPosts = posts.find(p => p.id == id);
+    let editingPostId = posts.find(p => p.id == id);
+       if (!editingPostId) return;
+     if (editingPostId)  {
 
-    if (!editPosts) return;
+        ImgUrlInput.value = editingPostId.imgUrl
+       descriptionInput.value = editingPostId.description  
+       
 
-    ImgUrlInput.value = editPosts.imgUrl;
-    descriptionInput.value = editPosts.description;
+        
 
-
-    editingPostId = id;
-
-
-    document.querySelector(".btn-primary").innerText = "Update";
-
-
-    let m = new bootstrap.Modal(document.getElementById("exampleModal"));
-    m.show();
+        
 }
+}
+
+
+function toggleLike(postId, userId) {
+    let posts = JSON.parse(localStorage.getItem("postData")) || [];
+
+    let post = posts.find(p => p.id === postId);
+    if (!post) return;
+
+    if (post.likes.includes(userId)) {
+        post.likes = post.likes.filter(like => like !== userId);
+    } else {
+        post.likes.push(userId);
+    }
+
+    localStorage.setItem("postData", JSON.stringify(posts));
+    renderPosts();
+}
+
+
+
+
+
+
+
+
+
+
+
+    // if (!editPosts) return;
+
+    // ImgUrlInput.value =p?.imgUrl || "https://picsum.photos/600?food".imgUrl;
+    // descriptionInput.value = p?.description || ''.description;
+
+
+    // editingPostId = id;
+
+
+
+
+    // let m = new bootstrap.Modal(document.getElementById("exampleModal"));
+    // m.show();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

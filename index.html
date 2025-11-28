@@ -52,7 +52,6 @@
           <div class="modal-body">
 
 
-  <!-- <h2 class="fs-5">profile Pic url</h2> -->
   <h2 class="fs-5">imgUrl</h2>
   <!-- <input id="profilePicInput"  type="text" placeholder="Add your profile picture url"> -->
   <input id="ImgUrlInput"  type="text" placeholder="Add your profile picture url">
@@ -72,6 +71,41 @@
     </div>
     </div>
 
+
+
+    <!-- MODAL FOR NEW POST -->
+     <div id="editModal">
+     <div class="postmodal">
+    <div class="modal fade" id="exampleModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+
+          <div class="modal-header">
+            <h1 class="modal-title fs-5">Create New Post</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+
+          <div class="modal-body">
+
+
+  <h2 class="fs-5">imgUrl</h2>
+  <input id="ImgUrlInput"  type="text" placeholder="Add your profile picture url">
+  <hr>
+  <h2 class="fs-5">Description</h2>
+  <textarea id="descriptionInput"  name="" id=""></textarea>
+  <hr>
+          </div>
+
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button onclick="PostHandler()" type="button" class="btn btn-primary">Post</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+    </div>
+</div>
 
 
     <!-- STORIES -->
