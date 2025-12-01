@@ -30,8 +30,9 @@ function changeRules() {
      e.style.backgroundColor = "#37383b";
     isblack  = false
 
-  }else{
-    e.style.backgroundColor = "white";
+  }
+  else{
+    e.style.backgroundColor = "#f0f2f5";
     isblack  = true 
 
   } 
@@ -210,11 +211,10 @@ function editPosts(id) {
 
     if (!foundPost) return;
 
-    // Fill inputs
     ImgUrlInput.value = foundPost.imgUrl;
     descriptionInput.value = foundPost.description;
 
-    // SAVE ID FOR UPDATE
+
     editingPostId = id;
 }
 
