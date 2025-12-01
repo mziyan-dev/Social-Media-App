@@ -137,6 +137,30 @@ if (!descriptionInput.value && !profilePicInput) {
         alert("login first")
      return window.location = "login.html"
     }
+        let posts = JSON.parse(localStorage.getItem("postData")) || [];
+    if (editingPostId) {
+
+        posts = posts.map(p => {
+            if (p.id == editingPostId) {
+                return {
+                    ...p,
+                    description: descriptionInput.value.trim(),
+                    imgUrl: ImgUrlInput.value.trim()
+                };
+            }
+            return p;
+        });
+
+        localStorage.setItem("postData", JSON.stringify(posts));
+        editingPostId = null; 
+
+        descriptionInput.value = "";
+        ImgUrlInput.value = "";
+        editModal.style.display = "none";
+
+        renderPosts();
+        return alert("Post updated successfully!");
+    }
 
 var postData = { 
     id: Date.now().toString(),
@@ -179,19 +203,19 @@ function deletePost(id){
 
 function editPosts(id) {
     editModal.style.display = "block"
+    editModal.style.display = "block"
+
     let posts = JSON.parse(localStorage.getItem("postData")) || [];
-    let editingPostId = posts.find(p => p.id == id);
-       if (!editingPostId) return;
-     if (editingPostId)  {
+    let foundPost = posts.find(p => p.id == id);
 
-        ImgUrlInput.value = editingPostId.imgUrl
-       descriptionInput.value = editingPostId.description  
-       
+    if (!foundPost) return;
 
-        
+    // Fill inputs
+    ImgUrlInput.value = foundPost.imgUrl;
+    descriptionInput.value = foundPost.description;
 
-        
-}
+    // SAVE ID FOR UPDATE
+    editingPostId = id;
 }
 
 
@@ -210,83 +234,4 @@ function toggleLike(postId, userId) {
     localStorage.setItem("postData", JSON.stringify(posts));
     renderPosts();
 }
-
-
-
-
-
-
-
-
-
-
-
-    // if (!editPosts) return;
-
-    // ImgUrlInput.value =p?.imgUrl || "https://picsum.photos/600?food".imgUrl;
-    // descriptionInput.value = p?.description || ''.description;
-
-
-    // editingPostId = id;
-
-
-
-
-    // let m = new bootstrap.Modal(document.getElementById("exampleModal"));
-    // m.show();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//  let posts = JSON.parse(localStorage.getItem("postData"));
-//     if (!Array.isArray(posts)) posts = [];
-
-//     if (editingPostId) {
-
-//         let updatedPosts = posts.map(p => {
-//             if (p.id === editingPostId) {
-//                 return {
-//                     ...p,
-//                     description: descriptionInput.value.trim(),
-//                     imgUrl: ImgUrlInput.value.trim()
-//                 };
-//             }
-//             return p;
-//         });
-
-//         localStorage.setItem("postData", JSON.stringify(updatedPosts));
-
-//         editingPostId = null;
-//         document.querySelector(".btn-primary").innerText = "Post";
-
-//         descriptionInput.value = "";
-//         ImgUrlInput.value = "";
-
-//         let modalEl = document.getElementById("exampleModal");
-//         let modal = bootstrap.Modal.getInstance(modalEl);
-//         modal.hide();
-
-//         renderPosts();
-//         return alert("Post updated successfully!");
-//     }
 
