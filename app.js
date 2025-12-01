@@ -105,7 +105,7 @@ function btns(){
 btns()
 
 function signup(){
-    window.location = "Signup.html"
+    window.location = "SignUp.html"
 
     
 }
